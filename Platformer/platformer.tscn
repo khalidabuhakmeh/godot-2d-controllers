@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://djac04whr2bch"]
+
+[ext_resource type="Texture2D" uid="uid://crpgdwkkodepb" path="res://Platformer/spritesheet_double.png" id="1_o1v5o"]
+[ext_resource type="Script" path="res://Platformer/platformer.gd" id="2_5aw6m"]
+
+[sub_resource type="Gradient" id="Gradient_gceu4"]
+colors = PackedColorArray(0.531039, 0.713064, 0.985593, 1, 0.901857, 0.743907, 0.832833, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wfwbw"]
+gradient = SubResource("Gradient_gceu4")
+fill_from = Vector2(0.206522, 0.05)
+fill_to = Vector2(0.25, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_63ddw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc5ge"]
+atlas = ExtResource("1_o1v5o")
+region = Rect2(320, 480.25, 158, 158)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blt0i"]
+atlas = ExtResource("1_o1v5o")
+region = Rect2(800, 320.55, 160, 159.182)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21jxe"]
+atlas = ExtResource("1_o1v5o")
+region = Rect2(802, 701, 107.5, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sttsn"]
+atlas = ExtResource("1_o1v5o")
+region = Rect2(990.43, 699.742, 67.8792, 72.5926)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kl7hu"]
+size = Vector2(135, 158)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4xsl"]
+atlas = ExtResource("1_o1v5o")
+region = Rect2(352.402, 0.785999, 160, 159)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vml8k"]
+size = Vector2(157, 158)
+
+[node name="Platformer" type="Node2D"]
+
+[node name="Sky" type="Sprite2D" parent="."]
+scale = Vector2(69.08, 21.56)
+texture = SubResource("GradientTexture2D_wfwbw")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 606)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, -79)
+shape = SubResource("WorldBoundaryShape2D_63ddw")
+
+[node name="Block" type="Sprite2D" parent="Floor"]
+position = Vector2(0, 62)
+scale = Vector2(78.88, 1.76)
+texture = SubResource("AtlasTexture_cc5ge")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(0, 432)
+script = ExtResource("2_5aw6m")
+
+[node name="Block" type="Sprite2D" parent="Player"]
+texture = SubResource("AtlasTexture_blt0i")
+
+[node name="Eyes" type="Sprite2D" parent="Player/Block"]
+texture = SubResource("AtlasTexture_21jxe")
+
+[node name="Right Hand" type="Sprite2D" parent="Player/Block"]
+position = Vector2(101, -2)
+texture = SubResource("AtlasTexture_sttsn")
+
+[node name="Left Hand" type="Sprite2D" parent="Player/Block"]
+position = Vector2(-84, 2)
+texture = SubResource("AtlasTexture_sttsn")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_kl7hu")
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="Block" type="StaticBody2D" parent="Blocks"]
+position = Vector2(527, 447)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocks/Block"]
+texture = SubResource("AtlasTexture_y4xsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocks/Block"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_vml8k")
+
+[node name="Block2" type="StaticBody2D" parent="Blocks"]
+position = Vector2(684, 447)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocks/Block2"]
+texture = SubResource("AtlasTexture_y4xsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocks/Block2"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_vml8k")
+
+[node name="Block3" type="StaticBody2D" parent="Blocks"]
+position = Vector2(842, 447)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocks/Block3"]
+texture = SubResource("AtlasTexture_y4xsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocks/Block3"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_vml8k")
+
+[node name="Block4" type="StaticBody2D" parent="Blocks"]
+position = Vector2(684, 288)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Blocks/Block4"]
+texture = SubResource("AtlasTexture_y4xsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocks/Block4"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_vml8k")

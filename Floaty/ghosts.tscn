@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpfepuec6fbc4"]
+
+[ext_resource type="Texture2D" uid="uid://bw8e7dg4mcv8n" path="res://Floaty/halloween-7459464_1920.png" id="1_mu1n7"]
+[ext_resource type="Script" path="res://Floaty/ghost.gd" id="2_sobai"]
+[ext_resource type="Texture2D" uid="uid://xce5y2g3t32i" path="res://Floaty/ghost-emoji.png" id="3_63d75"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u5kn0"]
+radius = 63.0079
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lgvya"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ppp8g"]
+normal = Vector2(0, 1)
+
+[node name="Spooky" type="Node2D"]
+
+[node name="Background" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(1900, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+texture = ExtResource("1_mu1n7")
+
+[node name="Ghost" type="CharacterBody2D" parent="."]
+script = ExtResource("2_sobai")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ghost"]
+self_modulate = Color(1, 1, 1, 0.659)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_63d75")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ghost"]
+shape = SubResource("CircleShape2D_u5kn0")
+
+[node name="Camera2D" type="Camera2D" parent="Ghost"]
+zoom = Vector2(1.25, 1.25)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, 420)
+shape = SubResource("WorldBoundaryShape2D_lgvya")
+
+[node name="Sky" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sky"]
+position = Vector2(2, -524)
+shape = SubResource("WorldBoundaryShape2D_ppp8g")

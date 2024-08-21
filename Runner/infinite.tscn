@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://bv315ewm2h0sq"]
+
+[ext_resource type="Texture2D" uid="uid://dg6gdm3qouia7" path="res://Runner/background.png" id="1_32sdg"]
+[ext_resource type="Script" path="res://Runner/runner.gd" id="2_o1dra"]
+[ext_resource type="Texture2D" uid="uid://ciri5s02wq6g5" path="res://Runner/plane.png" id="3_5o4d0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_txawb"]
+radius = 14.1421
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2nvxi"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nasqw"]
+normal = Vector2(0, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scale = Vector2(1.1, 1.1)
+scroll_offset = Vector2(0, -25)
+repeat_size = Vector2(800, 0)
+repeat_times = 2
+
+[node name="Background" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(400, 0)
+texture = ExtResource("1_32sdg")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-2, -2)
+script = ExtResource("2_o1dra")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_5o4d0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_txawb")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(98, 0)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, -315)
+
+[node name="Floor" type="StaticBody2D" parent="Node2D"]
+position = Vector2(14, 477)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Floor"]
+shape = SubResource("WorldBoundaryShape2D_2nvxi")
+
+[node name="Ceiling" type="StaticBody2D" parent="Node2D"]
+position = Vector2(0, 119)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Ceiling"]
+position = Vector2(-1, 0)
+shape = SubResource("WorldBoundaryShape2D_nasqw")
