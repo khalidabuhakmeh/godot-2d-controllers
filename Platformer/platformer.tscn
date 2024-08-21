@@ -60,6 +60,8 @@ texture = SubResource("AtlasTexture_cc5ge")
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(0, 432)
 script = ExtResource("2_5aw6m")
+speed = 250.0
+jump_velocity = -575.0
 
 [node name="Block" type="Sprite2D" parent="Player"]
 texture = SubResource("AtlasTexture_blt0i")
