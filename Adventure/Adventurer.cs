@@ -2,7 +2,7 @@ using Godot;
 
 namespace Controllers.Scripts;
 
-public partial class Adventurer: Ghost
+public partial class Adventurer: CharacterBody2D
 {
     [Export] public int Speed { get; set; } = 100;
     
